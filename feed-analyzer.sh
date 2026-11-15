@@ -14,18 +14,13 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 
-# Find which column is "Username" from the header (so we don't hard-code it)
 COL=$(head -n 1 "$FILE" | tr -d '\r' | tr ',' '\n' | grep -n -x -i 'Username' | cut -d: -f1)
 if [ -z "$COL" ]; then
     echo "Error: no 'Username' column found in the header of '$FILE'."
     exit 1
 fi
 
-# NOTE: some tweets contain line breaks inside quotes, so one tweet can span
-# several lines. The awk step below only reads the Username from the FIRST line
-# of each tweet and skips the continuation lines (it tracks whether we are still
-# inside an open quote). After that it is the classic pipeline:
-#   sort -> uniq -c -> sort -nr -> head
+
 echo "Top 5 Most Active Users"
 echo "-----------------------"
 echo "Posts  Username"
