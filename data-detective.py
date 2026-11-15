@@ -48,12 +48,11 @@ def clean_data(tweets):
     fixed = 0
 
     for tweet in tweets:
-        # Missing Text -> remove the tweet
+        
         if is_blank(tweet.get("Text")):
             removed += 1
             continue
 
-        # Missing Likes / Retweets -> replace with 0 (and convert to int)
         likes, likes_fixed = to_number(tweet.get("Likes"))
         retweets, retweets_fixed = to_number(tweet.get("Retweets"))
         tweet["Likes"] = likes
@@ -98,14 +97,12 @@ def custom_sort_by_likes(tweets):
     QUEST 3: Implement Bubble Sort or Selection Sort to sort the list 
     by 'Likes' in descending order. NO .sort() allowed!
     """
-    # Build a copy with append() so the original list keeps its order
     sorted_tweets = []
     for tweet in tweets:
         sorted_tweets.append(tweet)
 
     n = len(sorted_tweets)
-    # Selection Sort: on each pass, find the tweet with the most Likes
-    # in the unsorted part and swap it into position i.
+
     for i in range(n):
         max_index = i
         for j in range(i + 1, n):
@@ -128,17 +125,13 @@ def search_tweets(tweets, keyword):
 
 
 if __name__ == "__main__":
-    # Load the messy data
     dataset = load_raw_data("twitter_dataset.csv")
     print(f"Loaded {len(dataset)} raw tweets.\n")
     
-    # Quest 1: clean the data
     clean_dataset = clean_data(dataset)
 
-    # Quest 2: viral tweet
     find_viral_tweet(clean_dataset)
 
-    # Quest 3: top 10 most liked tweets
     print("--- Quest 3: Top 10 Most Liked Tweets ---")
     sorted_dataset = custom_sort_by_likes(clean_dataset)
     top_10 = sorted_dataset[:10]
@@ -149,7 +142,6 @@ if __name__ == "__main__":
         rank += 1
     print()
 
-    # Quest 4: search
     print("--- Quest 4: The Content Filter ---")
     keyword = input("Enter a search word (e.g. tax, hard, development): ").strip()
     if keyword == "":
