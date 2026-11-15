@@ -1,6 +1,6 @@
 # Lab 3 – Data Detective & Feed Analyzer
 
-Analyzes `twitter_dataset.csv` (columns: `Username, Text, Likes, Retweets`) with Python and Bash.
+Analyzes `twitter_dataset.csv` with Python and Bash.
 
 ## Files
 - `data-detective.py` – Python app (Quests 1–4)
